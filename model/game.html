@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hokie ERS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/main.css" rel="stylesheet">
+    <style>
+        #lobbyText {
+            display: none;
+        }
+
+        #youAreTheHost td {
+            text-align: center;
+        }
+
+        #startGameButton {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        #startGameButton:hover {
+            background-color: #45a049; /* Darker Green */
+        }
+
+        #slapDoubles, #slapSandwiches, #slapMarriage, #slapThreeAscDesc,
+        label[for="slapDoubles"], label[for="slapSandwiches"], label[for="slapMarriage"], label[for="slapThreeAscDesc"] {
+            display: none;
+        }
+
+        #gameRules {
+            font-size: 24px; /* Larger font size */
+        }
+    </style>
+</head>
+
+<body onload="init();">
+    <h1>Egyptian Rat Screw</h1>
+    <h2 id="lobbyText"></h2>
+    <canvas id="mainCanvas" width="1000" height="500" style="border:none;"></canvas>
+
+    <!-- Rules Section -->
+    <div id="gameRules">
+        <h3>Slap Rules</h3>
+        <ul>
+            <li><strong>Double:</strong> Two cards of the same rank are played consecutively</li>
+            <li><strong>Marriage:</strong> A king and queen are played consecutively</li>
+            <li><strong>Sandwich:</strong> Two cards of the same rank with a different card between them</li>
+            <li><strong>3 in a Row:</strong> Three cards of consecutive ranks are played in sequence (either ascending or descending).</li>
+        </ul>
+    </div>
+
+    <table id="hostSettingsTable">
+        <tbody id="youAreTheHost" style="display: none;">
+            <tr>
+                <td colspan="4">
+                    <p><b>HOST:</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <button onclick="startGame()" id="startGameButton" disabled>Start Game</button>
+                </td>
+            </tr>
+        </tbody>
+        <tr>
+            <td>
+                <label for="slapDoubles">Doubles<input id="slapDoubles" class="hostSetting" type="checkbox" checked disabled></label>
+            </td>
+            <td>
+                <label for="slapSandwiches">Sandwiches<input id="slapSandwiches" class="hostSetting" type="checkbox" checked disabled></label>
+            </td>
+            <td>
+                <label for="slapMarriage">Marriage<input id="slapMarriage" class="hostSetting" type="checkbox" checked disabled></label>
+            </td>
+            <td>
+                <label for="slapThreeAscDesc">3 Ascending/Descending<input id="slapThreeAscDesc" class="hostSetting" type="checkbox" checked disabled></label>
+            </td>
+        <tr>
+    </table>
+
+    <div id="cardImages" hidden>
+        
+        <img src="/cards/cardClubs10.png" id="cards/cardClubs10.png">
+        
+        <img src="/cards/cardClubs2.png" id="cards/cardClubs2.png">
+        
+        <img src="/cards/cardClubs3.png" id="cards/cardClubs3.png">
+        
+        <img src="/cards/cardClubs4.png" id="cards/cardClubs4.png">
+        
+        <img src="/cards/cardClubs5.png" id="cards/cardClubs5.png">
+        
+        <img src="/cards/cardClubs6.png" id="cards/cardClubs6.png">
+        
+        <img src="/cards/cardClubs7.png" id="cards/cardClubs7.png">
+        
+        <img src="/cards/cardClubs8.png" id="cards/cardClubs8.png">
+        
+        <img src="/cards/cardClubs9.png" id="cards/cardClubs9.png">
+        
+        <img src="/cards/cardClubsA.png" id="cards/cardClubsA.png">
+        
+        <img src="/cards/cardClubsJ.png" id="cards/cardClubsJ.png">
+        
+        <img src="/cards/cardClubsK.png" id="cards/cardClubsK.png">
+        
+        <img src="/cards/cardClubsQ.png" id="cards/cardClubsQ.png">
+        
+        <img src="/cards/cardDiamonds10.png" id="cards/cardDiamonds10.png">
+        
+        <img src="/cards/cardDiamonds2.png" id="cards/cardDiamonds2.png">
+        
+        <img src="/cards/cardDiamonds3.png" id="cards/cardDiamonds3.png">
+        
+        <img src="/cards/cardDiamonds4.png" id="cards/cardDiamonds4.png">
+        
+        <img src="/cards/cardDiamonds5.png" id="cards/cardDiamonds5.png">
+        
+        <img src="/cards/cardDiamonds6.png" id="cards/cardDiamonds6.png">
+        
+        <img src="/cards/cardDiamonds7.png" id="cards/cardDiamonds7.png">
+        
+        <img src="/cards/cardDiamonds8.png" id="cards/cardDiamonds8.png">
+        
+        <img src="/cards/cardDiamonds9.png" id="cards/cardDiamonds9.png">
+        
+        <img src="/cards/cardDiamondsA.png" id="cards/cardDiamondsA.png">
+        
+        <img src="/cards/cardDiamondsJ.png" id="cards/cardDiamondsJ.png">
+        
+        <img src="/cards/cardDiamondsK.png" id="cards/cardDiamondsK.png">
+        
+        <img src="/cards/cardDiamondsQ.png" id="cards/cardDiamondsQ.png">
+        
+        <img src="/cards/cardHearts10.png" id="cards/cardHearts10.png">
+        
+        <img src="/cards/cardHearts2.png" id="cards/cardHearts2.png">
+        
+        <img src="/cards/cardHearts3.png" id="cards/cardHearts3.png">
+        
+        <img src="/cards/cardHearts4.png" id="cards/cardHearts4.png">
+        
+        <img src="/cards/cardHearts5.png" id="cards/cardHearts5.png">
+        
+        <img src="/cards/cardHearts6.png" id="cards/cardHearts6.png">
+        
+        <img src="/cards/cardHearts7.png" id="cards/cardHearts7.png">
+        
+        <img src="/cards/cardHearts8.png" id="cards/cardHearts8.png">
+        
+        <img src="/cards/cardHearts9.png" id="cards/cardHearts9.png">
+        
+        <img src="/cards/cardHeartsA.png" id="cards/cardHeartsA.png">
+        
+        <img src="/cards/cardHeartsJ.png" id="cards/cardHeartsJ.png">
+        
+        <img src="/cards/cardHeartsK.png" id="cards/cardHeartsK.png">
+        
+        <img src="/cards/cardHeartsQ.png" id="cards/cardHeartsQ.png">
+        
+        <img src="/cards/cardSpades10.png" id="cards/cardSpades10.png">
+        
+        <img src="/cards/cardSpades2.png" id="cards/cardSpades2.png">
+        
+        <img src="/cards/cardSpades3.png" id="cards/cardSpades3.png">
+        
+        <img src="/cards/cardSpades4.png" id="cards/cardSpades4.png">
+        
+        <img src="/cards/cardSpades5.png" id="cards/cardSpades5.png">
+        
+        <img src="/cards/cardSpades6.png" id="cards/cardSpades6.png">
+        
+        <img src="/cards/cardSpades7.png" id="cards/cardSpades7.png">
+        
+        <img src="/cards/cardSpades8.png" id="cards/cardSpades8.png">
+        
+        <img src="/cards/cardSpades9.png" id="cards/cardSpades9.png">
+        
+        <img src="/cards/cardSpadesA.png" id="cards/cardSpadesA.png">
+        
+        <img src="/cards/cardSpadesJ.png" id="cards/cardSpadesJ.png">
+        
+        <img src="/cards/cardSpadesK.png" id="cards/cardSpadesK.png">
+        
+        <img src="/cards/cardSpadesQ.png" id="cards/cardSpadesQ.png">
+        
+    </div>
+    <img src="/slap/foot.png" id="slapper">
+
+    <script src="/scripts/socket.io/socket.io.js"></script>
+    <script src="/scripts/howler.js/howler.core.min.js"></script>
+    <script src="/scripts/components.js"></script>
+    <script src="/scripts/game.js"></script>
+    <script src="/scripts/sockets.js"></script>
+</body>
+
+</html>

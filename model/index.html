@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ERS - Egyptian Rat Screw</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Courier New', monospace; /* Changed font-family */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f8f8;
+        }
+
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 80%;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-side {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-side img {
+            width: 300px; /* Adjust as needed */
+            height: auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            display: block;
+            color: #666;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-content">
+        <div class="image-side">
+            <img src="hokie.png" alt="Hokie Image">
+        </div>
+        <div class="container">
+            <h1>Egyptian Rat Screw</h1>
+            <div class="input-group">
+                <label for="namebox">Player Name:</label>
+                <input type="text" id="namebox" maxlength="20">
+            </div>
+            <div class="input-group" style="display: none;">
+                <label for="lobbybox">Name:</label>
+                <input type="text" id="lobbybox" value="NAD_final" maxlength="20" style="display: none;">
+            </div>
+            <button id="startLobbyBtn" class="btn">Join Game</button>
+        </div>
+    </div>
+
+    <script>
+        function joinLobby() {
+            let playerName = document.getElementById("namebox").value.trim().replace(/[^0-9A-Za-z_\-]/g, "");
+            let lobbyName = document.getElementById("lobbybox").value.trim().replace(/[^0-9A-Za-z_\-]/g, "");
+            if (lobbyName !== "" && playerName !== "") {
+                window.location.href = `./play/${lobbyName}+${playerName}`;
+            }
+        }
+
+        document.getElementById("startLobbyBtn").addEventListener("click", joinLobby);
+    </script>
+</body>
+
+</html>

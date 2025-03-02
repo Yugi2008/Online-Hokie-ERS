@@ -1,0 +1,12 @@
+vtece4564-gamelib
+Flask
+websockets
+python-engineio
+python-socketio
+bidict
+click
+colorama
+itsdangerous
+Jinja2
+MarkupSafe
+Werkzeug

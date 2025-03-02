@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hokie ERS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/main.css" rel="stylesheet">
+    <style>
+        #lobbyText {
+            display: none;
+        }
+
+        #youAreTheHost td {
+            text-align: center;
+        }
+
+        #startGameButton {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        #startGameButton:hover {
+            background-color: #45a049; /* Darker Green */
+        }
+
+        #slapDoubles, #slapSandwiches, #slapMarriage, #slapThreeAscDesc,
+        label[for="slapDoubles"], label[for="slapSandwiches"], label[for="slapMarriage"], label[for="slapThreeAscDesc"] {
+            display: none;
+        }
+
+        #gameRules {
+            font-size: 24px; /* Larger font size */
+        }
+    </style>
+</head>
+
+<body onload="init();">
+    <h1>Egyptian Rat Screw</h1>
+    <h2 id="lobbyText"></h2>
+    <canvas id="mainCanvas" width="1000" height="500" style="border:none;"></canvas>
+
+    <!-- Rules Section -->
+    <div id="gameRules">
+        <h3>Slap Rules</h3>
+        <ul>
+            <li><strong>Double:</strong> Two cards of the same rank are played consecutively</li>
+            <li><strong>Marriage:</strong> A king and queen are played consecutively</li>
+            <li><strong>Sandwich:</strong> Two cards of the same rank with a different card between them</li>
+            <li><strong>3 in a Row:</strong> Three cards of consecutive ranks are played in sequence (either ascending or descending).</li>
+        </ul>
+    </div>
+
+    <table id="hostSettingsTable">
+        <tbody id="youAreTheHost" style="display: none;">
+            <tr>
+                <td colspan="4">
+                    <p><b>HOST:</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <button onclick="startGame()" id="startGameButton" disabled>Start Game</button>
+                </td>
+            </tr>
+        </tbody>
+        <tr>
+            <td>
+                <label for="slapDoubles">Doubles<input id="slapDoubles" class="hostSetting" type="checkbox" checked disabled></label>
+            </td>
+            <td>
+                <label for="slapSandwiches">Sandwiches<input id="slapSandwiches" class="hostSetting" type="checkbox" checked disabled></label>
+            </td>
+            <td>
+                <label for="slapMarriage">Marriage<input id="slapMarriage" class="hostSetting" type="checkbox" checked disabled></label>
+            </td>
+            <td>
+                <label for="slapThreeAscDesc">3 Ascending/Descending<input id="slapThreeAscDesc" class="hostSetting" type="checkbox" checked disabled></label>
+            </td>
+        <tr>
+    </table>
+
+    <div id="cardImages" hidden>
+        {% for image in image_list %}
+        <img src="/{{ image }}" id="{{ image }}">
+        {% endfor %}
+    </div>
+    <img src="/slap/foot.png" id="slapper">
+
+    <script src="/scripts/socket.io/socket.io.js"></script>
+    <script src="/scripts/howler.js/howler.core.min.js"></script>
+    <script src="/scripts/components.js"></script>
+    <script src="/scripts/game.js"></script>
+    <script src="/scripts/sockets.js"></script>
+</body>
+
+</html>
