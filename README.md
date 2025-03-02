@@ -55,5 +55,5 @@ When it is your turn, your player name turns red, and you will be able to make o
 * **S / Down Arrow:** To retrieve won cards
 
 # Mid-game SLAP!
-![slap](./readme_imgs/slap.PNG)
+![slap](./readme_imgs/SLAP.PNG)
 
